@@ -1,0 +1,55 @@
+# Byte-compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+my_venv/
+env/
+
+# Django-specific files
+db.sqlite3
+*.log
+*.pot
+
+# Media and static files
+/media/
+/staticfiles/
+
+# Local settings
+settings_local.py
+.env
+
+# IDE-specific files
+.vscode/
+.idea/
+*.swp
+
+# Testing and coverage
+.coverage
+*.cover
+htmlcov/
+nosetests.xml
+coverage.xml
+*.test
+*.pytest_cache/
+
+# Migrations (optional)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Compiled files
+*.mo
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+*.orig
+*.rej
+*.swo
+
+# Docker-related files
+*.env.dev
+*.env.prod
+docker-compose.override.yml
