@@ -16,7 +16,7 @@ from .serializers import ImageSerializer
 
 # Create your views here.
 
-# @login_required
+# @login_required()
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FormParser])
 def upload_image(request):
@@ -56,7 +56,7 @@ def upload_image(request):
 
 
 
-# @login_required
+# @login_required()
 @api_view(['GET'])
 def get_bw_image(request, bw_img_id):
   try:
