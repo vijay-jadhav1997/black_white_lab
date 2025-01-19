@@ -64,6 +64,9 @@ A web application that allows users to upload colorful images, converts them to 
     ```bash
     SECRET_KEY=your-secret-key
     DEBUG=True
+    CORS_ALLOWED_ORIGINS=add_origins
+    ...
+    ...
     ```
 5. Apply database migrations:
     ```bash

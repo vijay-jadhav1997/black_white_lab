@@ -48,11 +48,17 @@ function Header({isLogin, setIsLogin}) {
               <div className="hidden lg:flex lg:items-center lg:space-x-10">
                 <NavLink to={''} title="Home" className="text-base font-medium text-black"> Home </NavLink>
 
-                <NavLink to={'/about'} title="About" className="text-base font-medium text-black"> About </NavLink>
+                <NavLink to={''} title="About" className="text-base font-medium text-black"> About </NavLink>
+
+                <NavLink to={''} title="Contact" className="text-base font-medium text-black"> Contact Us </NavLink>
+
+                <NavLink to={''} title="" className="text-base font-medium text-black"> Profile </NavLink>
+
+                {/* <NavLink to={'/about'} title="About" className="text-base font-medium text-black"> About </NavLink>
 
                 <NavLink to={'/contact'} title="Contact" className="text-base font-medium text-black"> Contact Us </NavLink>
 
-                  {/* <NavLink to={''} title="" className="text-base font-medium text-black"> Pricing </NavLink> */}
+                <NavLink to={'/profile'} title="" className="text-base font-medium text-black"> Profile </NavLink> */}
               </div>
 
               <div className="lg:absolute lg:-translate-x-1/2 lg:inset-y-5 lg:left-1/2">

@@ -81,7 +81,7 @@ function Home({isLogin}) {
                             Transform your Images, with
                             <div className="relative inline-flex">
                                 {/* <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-[#4ADE80]"></span> */}
-                                <span className="heading relative text-4xl font-bold text-white bg-gray-800 sm:text-6xl lg:text-7xl">BlackWhiteLab</span>
+                                <span className="heading relative text-4xl lg:my-4 font-bold text-white bg-gray-800 sm:text-6xl lg:text-7xl">BlackWhiteLab</span>
                             </div>
                         </h1>
 
@@ -101,7 +101,7 @@ function Home({isLogin}) {
 
         <section id="img-processing-container" className="mt-2 py-5 sm:py-16 lg:py-24">
             <div className="pb-8 border-b border-green-600 border-dotted">
-                <h3 className="mb-4 py-2 my-2 font-bold text-3xl">Try Your Own Image</h3>
+                <h3 className="mb-4 py-2 my-2 font-bold text-3xl lg:text-4xl">Try Your Own Image</h3>
                 {/* {message === '' ? '' : <p className="my-4 text-base text-red-600">{message}</p>} */}
                 {message?.error !== undefined ? <p className="m-4 text-lg font-medium text-red-600">{message?.error}</p> : ''}
                 {message?.success !== undefined ? <p className="m-4 text-lg font-medium text-green-600">{message?.success}</p> : ''}
@@ -114,7 +114,7 @@ function Home({isLogin}) {
                         accept="image/*"
                         onChange={(e) => handleChange(e)}
                         placeholder="Select Your Image"
-                        className="block w-[80%] mx-auto py-4 pl-10 pr-4 border-blue-600 cursor-pointer text-black placeholder-gray-500 transition-all duration-200 border-dashed border-2 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
+                        className="block w-[80%] mx-auto py-4 sm:py-10 pl-10 pr-4 border-blue-600 cursor-pointer text-black placeholder-gray-500 transition-all duration-200 border-dashed border-2 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
                         required
                     />
                     {/* <label htmlFor="image" className="font-semibold text-2xl text-gray-900"> Select your Image </label> */}
