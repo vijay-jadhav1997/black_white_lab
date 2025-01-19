@@ -1,14 +1,16 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
-function Login() {
- const [message, setMessage] = useState('')
+function Login({setIsLogin}) {
+ const [message, setMessage] = useState(null)
     const [userData, setUserData] = useState({
         username: '',
-        // email: '',
         password: '',
+        // email: '',
     })
 
+
+    const navigate = useNavigate();
 
     function handleChange(e) {
         e.preventDefault()
@@ -20,30 +22,45 @@ function Login() {
     async function handleSubmit(e) {
         e.preventDefault()
 
+        const apiUrl = import.meta.env.VITE_API_URL
+
         // console.log(userData);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth_api/login', {
+            const response = await fetch(`${apiUrl}auth/user-login/`, {
                 method: 'POST',
-                headers: {'content-Type': 'application/json'},
+                headers: {
+                    'content-Type': 'application/json',
+                },
                 body: JSON.stringify(userData),
             })
 
-            console.log(response);
+            // console.log(response);
             
             
             if(response.ok) {
                 const responseData = await response.json()
+
                 // console.log(responseData);
-                setMessage(responseData.message || 'User registration successful!')
+
+                setIsLogin(true)
+                setUserData({username: '', password: '',})
+                
+                localStorage.setItem('accessToken', responseData?.access)
+                localStorage.setItem('refreshToken', responseData?.refresh)
+                
+                setMessage({success: responseData?.message || 'User logged in successful!'})
+
+                alert(`Dear ${userData?.username}, you logged in successfully!`)
+                navigate('/')
             } 
             else {
                 const backendError = await response.json()
-                setMessage(`Error: ${JSON.stringify(backendError)}`)
+                setMessage({error: `Error: ${JSON.stringify(backendError)}`})
             }
         } catch (error) {
             console.error('Error', error);
-            setMessage('Something went wrong. Please, try again later')
+            setMessage({error: 'Something went wrong. Please, try again later'})
         }
     }
     
@@ -62,7 +79,8 @@ function Login() {
                     <p className="mt-2 text-base text-gray-600">Don’t have one? <Link to={'/signup'} title="signup here" className="text-blue-600 transition-all duration-200 hover:underline hover:text-blue-700">Create a free account</Link></p>
                 </div>
 
-                {message === '' ? '' : <p className="mt-4 text-base text-red-600">{message}</p>}
+                {message?.error !== undefined ? <p className="mt-4 text-base text-red-600">{message?.error}</p> : ''}
+                {message?.success !== undefined ? <p className="mt-4 text-base text-green-600">{message?.success}</p> : ''}
                 
                 <form  onSubmit={handleSubmit} className="mt-4">
                     <div className="space-y-5">
@@ -91,27 +109,7 @@ function Login() {
                         <div>
                             <button
                                 type="button"
-                                className="
-                                    relative
-                                    inline-flex
-                                    items-center
-                                    justify-center
-                                    w-full
-                                    px-4
-                                    py-4
-                                    text-base
-                                    font-semibold
-                                    text-gray-700
-                                    transition-all
-                                    duration-200
-                                    bg-white
-                                    border-2 border-gray-200
-                                    rounded-md
-                                    hover:bg-gray-100
-                                    focus:bg-gray-100
-                                    hover:text-black
-                                    focus:text-black focus:outline-none
-                                "
+                                className="relative inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-gray-700 transition-all duration-200 bg-white border-2 border-gray-200 rounded-md hover:bg-gray-100 focus:bg-gray-100 hover:text-black focus:text-black focus:outline-none"
                             >
                                 <div className="absolute hover:bg-slate-300 inset-y-0 left-0 p-4">
                                     <svg className="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

@@ -5,16 +5,18 @@ import { Routes, Route } from 'react-router-dom'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import Footer from './components/Footer'
+import { useState } from 'react'
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false)
 
   return (
     <>
-      <Header />
+      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       <Routes >
-        <Route path='' element={<Home />} />
+        <Route path='' element={<Home isLogin={isLogin} />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={<Login setIsLogin={setIsLogin} />} />
         {/* <Route path='' element={<Profile />} /> */}
       </Routes>
       <Footer />

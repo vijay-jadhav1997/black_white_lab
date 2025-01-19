@@ -1,13 +1,42 @@
-import { useEffect, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { useState } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
 
-function Header() {
-  const [isLogin, ] = useState(false)
+function Header({isLogin, setIsLogin}) {
+  // const [isLogin, setIsLogin] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  useEffect(() => {
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    const apiUrl = import.meta.env.VITE_API_URL
+
+    const refreshToken = localStorage.getItem("refreshToken")
+
+    if (!refreshToken) {
+      console.error("No refresh token found");
+      return;
+    }
     
-  }, [])
+    const response = await fetch(`${apiUrl}auth/user-logout/`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({refresh: refreshToken}),
+      credentials: 'include',
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert(result.message);
+      setIsLogin(false)
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      
+      navigate("/login");
+    } else {
+      alert('Logout failed');
+    }
+  };
   
   return (
     <>
@@ -66,7 +95,7 @@ function Header() {
                     <NavLink to={'/login'} title="" className="text-base font-medium text-black"> Login </NavLink>
                   </>
                   :
-                  <Link to={''}>Logout</Link>
+                  <button onClick={() => handleLogout()} className="text-base font-medium text-black">Logout</button>
                 }
 
                 {/* <NavLink to={''} title="" className="flex items-center justify-center w-10 h-10 text-white bg-black rounded-full">
@@ -105,8 +134,8 @@ function Header() {
 
               <hr className="my-4 border-gray-200" />
 
-              <div className="flex flex-col space-y-2">
-                {
+              <div className="flex flex-col pb-2 space-y-2">
+                {/* {
                   !isLogin ?
                   <>
                     <NavLink to={'/signup'} title="signup" className="py-2 text-base text-center font-medium hover:bg-blue-200 text-black transition-all duration-200 focus:text-blue-600"> Sign up </NavLink>
@@ -114,6 +143,15 @@ function Header() {
                   </>
                   :
                   <Link to={''} title="logout" className="py-2 text-base text-center font-medium hover:bg-blue-200 text-black transition-all duration-200 focus:text-blue-600"> Login </Link>
+                } */}
+                {
+                  !isLogin ?
+                  <>
+                    <NavLink to={'/signup'} title="" className="py-2 text-base text-center font-medium hover:bg-blue-200 text-black transition-all duration-200 focus:text-blue-600"> Sign up </NavLink>
+                    <NavLink to={'/login'} title="" className="py-2 text-base text-center font-medium hover:bg-blue-200 text-black transition-all duration-200 focus:text-blue-600"> Login </NavLink>
+                  </>
+                  :
+                  <button onClick={() => handleLogout()} className="py-2 text-base text-center font-medium hover:bg-red-600 hover:text-white text-black transition-all duration-200 focus:text-red-600">Logout</button>
                 }
               
               </div>
