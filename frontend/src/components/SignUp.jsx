@@ -60,7 +60,6 @@ function SignUp() {
                 const backendError = await response.json()
                 // setMessage(`Error: ${JSON.stringify(backendError)}`)
                 setMessage({error: `Error: ${JSON.stringify(backendError)}`})
-
             }
         } catch (error) {
             console.error('Error', error);
