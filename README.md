@@ -23,11 +23,13 @@ A web application that allows users to upload colorful images, converts them to 
 - **React.js**: Frontend framework for building user interfaces.
 - **React Router DOM**: For handling client-side routing.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
+- **vite**: Build tools.
 
 ### **Backend**
 - **Python**
 - **Django**: Web framework for building server-side functionality.
 - **Django REST Framework (DRF)**: For building RESTful API endpoints.
+- **simple_jwt**: For JWT authentication and securing RESTful API endpoints.
 - **Pillow**: Python Imaging Library for image processing.
 - **python-decouple**: To manage environment variables securely.
 
@@ -41,6 +43,7 @@ A web application that allows users to upload colorful images, converts them to 
 
 ### Frontend
 - Node.js (Latest version)
+- npm (Latest version)
 
 ---
 
